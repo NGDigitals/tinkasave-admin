@@ -1,0 +1,36 @@
+.sidebar {
+    background: #342C58;
+    position  : fixed;
+    left      : 0;
+    height    : 100%;
+    width     : 75px;
+}
+
+
+.menu {
+    margin-top: 100px;
+    ul {
+        li {
+            text-align: center;
+            a {
+                padding: 12px 15px;
+                display: inline-block;
+                margin-bottom: 5px;
+                border-radius: 5px;
+                &:hover,&:focus,&.active{
+                    background: #3A3361;
+                }
+                &.active{
+                    background: $primary;
+                    i {
+                        color: #fff;
+                    }
+                }
+                i {
+                    color: #9591CC;
+                    font-size: 24px;
+                }
+            }
+        }
+    }
+}

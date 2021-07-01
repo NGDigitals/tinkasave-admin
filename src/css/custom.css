@@ -1,0 +1,15 @@
+.credit{
+    color: #00ff00 !important;
+}
+
+.debit{
+    color: #ff0000 !important;
+}
+
+.white-link{
+    color: #ffffff !important;
+}
+
+.dashboard-widget-card{
+    padding: 15px !important;
+}
