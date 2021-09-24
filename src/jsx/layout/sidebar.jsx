@@ -8,35 +8,35 @@ function Sidebar() {
     return (
         <>
             <div className="sidebar">
-                <Link class="brand-logo" to={"/"}>
+                <Link className="brand-logo" to={"/"}>
                     <img src={require('../../images/logo.png')} alt="" />
                 </Link>
                 <div className="menu">
                     <ul>
                         <li>
                             <Link to={"/"} data-toggle="tooltip" data-placement="right" title="Home">
-                                <span><i class="icofont-ui-home"></i></span>
+                                <span><i className="icofont-ui-home"></i></span>
                             </Link>
                         </li>
                         <li><Link to={"/users/users"} data-toggle="tooltip" data-placement="right" title="Buy Sale">
-                            <span><i class="icofont-users"></i></span>
+                            <span><i className="icofont-users"></i></span>
                         </Link>
                         </li>
                         <li><Link to={"/accounts"} data-toggle="tooltip" data-placement="right" title="Accounts">
-                            <span><i class="icofont-architecture-alt"></i></span>
+                            <span><i className="icofont-architecture-alt"></i></span>
                         </Link>
                         </li>
                         <li><Link to={"/settings"} data-toggle="tooltip" data-placement="right" title="Settings">
-                            <span><i class="icofont-ui-settings"></i></span>
+                            <span><i className="icofont-ui-settings"></i></span>
                         </Link>
                         </li>
-                        <li class="logout"><Link to={"/signin"} data-toggle="tooltip" data-placement="right"
+                        <li className="logout"><Link to={"/signin"} data-toggle="tooltip" data-placement="right"
                             title="Signout">
-                            <span><i class="icofont-power"></i></span>
+                            <span><i className="icofont-power"></i></span>
                         </Link>
                         </li>
                     </ul>
-                    <div class="copyright">
+                    <div className="copyright">
                         © TinkaSave
                     </div>
                 </div>

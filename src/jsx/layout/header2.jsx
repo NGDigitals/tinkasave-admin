@@ -15,16 +15,16 @@ function Header2() {
                             <nav className="navbar navbar-expand-lg navbar-light px-0 justify-content-between">
                                 {/* <Link className="navbar-brand" to={'/'}><img src={require('./../../images/logo.png')} alt="" /></Link> */}
 
-                                <div class="header-search d-flex align-items-center">
-                                    <Link class="brand-logo mr-3" href="index.html">
+                                <div className="header-search d-flex align-items-center">
+                                    <Link className="brand-logo mr-3" to="/">
                                         <img src={require('./../../images/logo.png')} alt="" width="30" />
                                     </Link>
                                     <form>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Search" />
-                                            <div class="input-group-append">
-                                                <span class="input-group-text" id="basic-addon2"><i
-                                                    class="fa fa-search"></i></span>
+                                        <div className="input-group">
+                                            <input type="text" className="form-control" placeholder="Search" />
+                                            <div className="input-group-append">
+                                                <span className="input-group-text" id="basic-addon2"><i
+                                                    className="fa fa-search"></i></span>
                                             </div>
                                         </div>
                                     </form>

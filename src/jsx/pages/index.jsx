@@ -1,204 +1,266 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable array-callback-return */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Header2 from '../layout/header2';
 import Sidebar from '../layout/sidebar';
 import PageTitle from '../element/page-title';
-
 import AreaChart from '../charts/area';
+import DashboardService from '../services/DashboardService';
 
 
 function Dashboard() {
+    const isRendered = useRef(false);
+    const [airtime, setAirtime] = useState({});
+    const [atm, setATM] = useState({});
+    const [buddie, setBuddie] = useState({});
+    const [group, setGroup] = useState({});
+    const [smooth, setSmooth] = useState({});
+    const [kid, setKid] = useState({});
+    const [totalSavings, setTotalSavings] = useState();
+    const [totalWithdrawals, setTotalWithdrawals] = useState();
+    const [totalInterests, setTotalInterests] = useState();
+    const [percentageSavings, setPercentageSavings] = useState();
+    const [percentageInterests, setPercentageInterests] = useState();
+    const [percentageWithdrawal, setPercentageWithdrawal] = useState();
+    const [savingsTransactions, setSavingsTransactions] = useState([]);
+    const [withdrawalsTransactions, setWithdrawalsTransactions] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        isRendered.current = true;
+        /*if (navigator.onLine) {*/fetchData()/*}*/
+        return () => {
+            isRendered.current = false;
+        };
+    }, []);
+
+    const fetchData = async () => {
+        try {
+            setIsLoading(true);
+            const response = await DashboardService.fetchDashboard();
+            if (isRendered.current) {
+                const {airtime, atm, buddie, group, smooth, kid, 
+                    total_savings, total_withdrawals, total_interests, 
+                    percentage_savings, percentage_withdrawal, percentage_interests,
+                    savings_transactions, withdrawals_transactions} = response.data.result;
+                    setAirtime(airtime);
+                    setATM(atm);
+                    setBuddie(buddie);
+                    setGroup(group);
+                    setSmooth(smooth);
+                    setKid(kid);
+                    setTotalSavings(total_savings);
+                    setTotalWithdrawals(total_withdrawals);
+                    setTotalInterests(total_interests);
+                    setPercentageSavings(percentage_savings);
+                    setPercentageWithdrawal(percentage_withdrawal);
+                    setPercentageInterests(percentage_interests);
+                    setSavingsTransactions(savings_transactions);
+                    setWithdrawalsTransactions(withdrawals_transactions);
+                setIsLoading(false);
+                setIsLoaded(true);
+            }
+        } catch (error) {
+          if (isRendered.current) {
+            setIsLoading(false);
+            // if (error.response && error.response.status === 401)
+            //   setUnauthorizedAction(true);
+          }
+        }
+    };
 
     return (
         <>
             <Header2 />
             <Sidebar />
             <PageTitle />
-
-            <div class="content-body">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-xl-9 col-xxl-12">
-                            <div class="row">
-                                <div class="col-xl-4 col-lg-12 col-xxl-4">
-                                    <div class="row">
-                                        <div class="col-xl-12 col-lg-12">
-                                            <div class="widget-card dashboard-widget-card">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div class="widget-stat">
-                                                        <div class="coin-title">
-                                                            <h5 class="d-inline-block ml-0 mb-2">
+            {(!isLoading && isLoaded) && (
+            <div className="content-body">
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-xl-9 col-xxl-12">
+                            <div className="row">
+                                <div className="col-xl-4 col-lg-12 col-xxl-4">
+                                    <div className="row">
+                                        <div className="col-xl-12 col-lg-12">
+                                            <div className="widget-card dashboard-widget-card">
+                                                <div className="d-flex justify-content-between align-items-center">
+                                                    <div className="widget-stat">
+                                                        <div className="coin-title">
+                                                            <h5 className="d-inline-block ml-0 mb-2">
                                                             <strong><Link to="/services/airtime">Airtime Savings
                                                                 {/*<span>{' '}(24h)</span>*/}</Link></strong>
                                                             </h5>
                                                         </div>
-                                                        <h4>N1254.36 <span class="badge badge-success ml-2">+
-                                                            06%</span>
+                                                        <h4>{airtime.interests}<span className="badge badge-success ml-2">+
+    {airtime.percentage_interests}%</span>
                                                         </h4>
                                                     </div>
-                                                    <div class="text-right">
-                                                        <h5 class="text-success">N1,650,000</h5>
-                                                        <span class="text-danger">N1,125</span>
+                                                    <div className="text-right">
+                                                        <h5 className="text-success">{airtime.savings}</h5>
+                                                        <span className="text-danger">{airtime.withdrawals}</span>
                                                     </div>
                                                     {/* <BtcChart/> */}
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xl-12 col-lg-12">
-                                            <div class="widget-card dashboard-widget-card">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div class="widget-stat">
-                                                        <div class="coin-title">
-                                                            <h5 class="d-inline-block ml-0 mb-2">
-                                                            <strong><Link to="/services/atm">ATM Savings
+                                        <div className="col-xl-12 col-lg-12">
+                                            <div className="widget-card dashboard-widget-card">
+                                                <div className="d-flex justify-content-between align-items-center">
+                                                    <div className="widget-stat">
+                                                        <div className="coin-title">
+                                                            <h5 className="d-inline-block ml-0 mb-2">
+                                                            <strong><Link to="/services/atm">Tinka Spend
                                                                 {/*<span>{' '}(24h)</span>*/}</Link></strong>
                                                             </h5>
                                                         </div>
-                                                        <h4>N1254.36 <span class="badge badge-danger ml-2">-
-                                                            06%</span>
+                                                        <h4>{atm.interests} <span className="badge badge-success ml-2">+
+    {atm.percentage_interests}%</span>
                                                         </h4>
                                                     </div>
-                                                    <div class="text-right">
-                                                        <h5 class="text-success">N1,650,000</h5>
-                                                        <span class="text-danger">N1,125</span>
+                                                    <div className="text-right">
+                                                        <h5 className="text-success">{atm.savings}</h5>
+                                                        <span className="text-danger">{atm.withdrawals}</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xl-12 col-lg-12">
-                                            <div class="widget-card dashboard-widget-card">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div class="widget-stat">
-                                                        <div class="coin-title">
-                                                            <h5 class="d-inline-block ml-0 mb-2">
+                                        <div className="col-xl-12 col-lg-12">
+                                            <div className="widget-card dashboard-widget-card">
+                                                <div className="d-flex justify-content-between align-items-center">
+                                                    <div className="widget-stat">
+                                                        <div className="coin-title">
+                                                            <h5 className="d-inline-block ml-0 mb-2">
                                                             <strong><Link to="/services/buddie">Tinka Buddie
                                                                 {/*<span>{' '}(24h)</span>*/}</Link></strong>
                                                             </h5>
                                                         </div>
-                                                        <h4>N1254.36 <span class="badge badge-danger ml-2">-
-                                                            06%</span>
+                                                        <h4>{buddie.interests} <span className="badge badge-success ml-2">+
+    {buddie.percentage_interests}%</span>
                                                         </h4>
                                                     </div>
-                                                    <div class="text-right">
-                                                        <h5 class="text-success">N1,650,000</h5>
-                                                        <span class="text-danger">N1,125</span>
+                                                    <div className="text-right">
+                                                        <h5 className="text-success">{buddie.savings}</h5>
+                                                        <span className="text-danger">{buddie.withdrawals}</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xl-12 col-lg-12">
-                                            <div class="widget-card dashboard-widget-card">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div class="widget-stat">
-                                                        <div class="coin-title">
-                                                            <h5 class="d-inline-block ml-0 mb-2">
+                                        <div className="col-xl-12 col-lg-12">
+                                            <div className="widget-card dashboard-widget-card">
+                                                <div className="d-flex justify-content-between align-items-center">
+                                                    <div className="widget-stat">
+                                                        <div className="coin-title">
+                                                            <h5 className="d-inline-block ml-0 mb-2">
                                                             <strong><Link to="/services/gsave">Tinka GSave
                                                                 {/*<span>{' '}(24h)</span>*/}</Link></strong>
                                                             </h5>
                                                         </div>
-                                                        <h4>N1254.36 <span class="badge badge-success ml-2">+
-                                                            06%</span>
+                                                        <h4>{group.interests} <span className="badge badge-success ml-2">+
+    {group.percentage_interests}%</span>
                                                         </h4>
                                                     </div>
-                                                    <div class="text-right">
-                                                        <h5 class="text-success">N1,650,000</h5>
-                                                        <span class="text-danger">N1,125</span>
+                                                    <div className="text-right">
+    <h5 className="text-success">{group.savings}</h5>
+                                                        <span className="text-danger">{group.withdrawals}</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xl-12 col-lg-12">
-                                            <div class="widget-card dashboard-widget-card">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div class="widget-stat">
-                                                        <div class="coin-title">
-                                                            <h5 class="d-inline-block ml-0 mb-2">
+                                        <div className="col-xl-12 col-lg-12">
+                                            <div className="widget-card dashboard-widget-card">
+                                                <div className="d-flex justify-content-between align-items-center">
+                                                    <div className="widget-stat">
+                                                        <div className="coin-title">
+                                                            <h5 className="d-inline-block ml-0 mb-2">
                                                             <strong><Link to="/services/smooth">Tinka Smooth
                                                                 {/*<span>{' '}(24h)</span>*/}</Link></strong>
                                                             </h5>
                                                         </div>
-                                                        <h4>N1254.36 <span class="badge badge-success ml-2">+
-                                                            06%</span>
+                                                        <h4>{smooth.interests} <span className="badge badge-success ml-2">+
+    {smooth.percentage_interests}%</span>
                                                         </h4>
                                                     </div>
-                                                    <div class="text-right">
-                                                        <h5 class="text-success">N1,650,000</h5>
-                                                        <span class="text-danger">N1,125</span>
+                                                    <div className="text-right">
+    <h5 className="text-success">{smooth.savings}</h5>
+    <span className="text-danger">{smooth.withdrawals}</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xl-12 col-lg-12">
-                                            <div class="widget-card dashboard-widget-card">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div class="widget-stat">
-                                                        <div class="coin-title">
-                                                            <h5 class="d-inline-block ml-0 mb-2">
+                                        <div className="col-xl-12 col-lg-12">
+                                            <div className="widget-card dashboard-widget-card">
+                                                <div className="d-flex justify-content-between align-items-center">
+                                                    <div className="widget-stat">
+                                                        <div className="coin-title">
+                                                            <h5 className="d-inline-block ml-0 mb-2">
                                                             <strong><Link to="/services/kids">Tinka Kids
                                                                 {/*<span>{' '}(24h)</span>*/}</Link></strong>
                                                             </h5>
                                                         </div>
-                                                        <h4>N1254.36 <span class="badge badge-success ml-2">+
-                                                            06%</span>
+                                                        <h4>{kid.interests} <span className="badge badge-success ml-2">+
+    {kid.percentage_interests}%</span>
                                                         </h4>
                                                     </div>
-                                                    <div class="text-right">
-                                                        <h5 class="text-success">N1,650,000</h5>
-                                                        <span class="text-danger">N1,125</span>
+                                                    <div className="text-right">
+    <h5 className="text-success">{kid.savings}</h5>
+    <span className="text-danger">{kid.withdrawals}</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xl-8 col-lg-12 col-xxl-8">
-                                    <div class="card profile_chart transparent">
-                                        <div class="card-header">
-                                            <div class="chart_current_data">
-                                                <h3>25,485,600 <span>NGN</span></h3>
-                                                <p class="text-success">1,250,648 <span>NGN (20%)</span></p>
+                                <div className="col-xl-8 col-lg-12 col-xxl-8">
+                                    <div className="card profile_chart transparent">
+                                        <div className="card-header">
+                                            <div className="chart_current_data">
+                                                <h3>{totalSavings}</h3>
+            <p className="text-success">{totalInterests} <span> ({percentageInterests}%)</span></p>
                                             </div>
                                         </div>
-                                        <div class="card-body">
-                                            <AreaChart />
-                                            <div class="chart-content text-center mt-3">
-                                                <div class="row">
-                                                    <div class="col-xl-4 col-sm-6 col-6">
-                                                        <div class="chart-stat">
-                                                            <p class="mb-1">Total Savings</p>
-                                                            <strong>N12,365,485</strong>
+                                        <div className="card-body">
+                                            <AreaChart savings={savingsTransactions} withdrawals={withdrawalsTransactions} />
+                                            <div className="chart-content text-center mt-3">
+                                                <div className="row">
+                                                    <div className="col-xl-4 col-sm-6 col-6">
+                                                        <div className="chart-stat">
+                                                            <p className="mb-1">Total Savings</p>
+    <strong>{totalSavings}</strong>
                                                         </div>
                                                     </div>
-                                                    <div class="col-xl-4 col-sm-6 col-6">
-                                                        <div class="chart-stat">
-                                                            <p class="mb-1">Total Interests</p>
-                                                            <strong>N2,900,564</strong>
+                                                    <div className="col-xl-4 col-sm-6 col-6">
+                                                        <div className="chart-stat">
+                                                            <p className="mb-1">Total Interests</p>
+    <strong>{totalInterests}</strong>
                                                         </div>
                                                     </div>
-                                                    <div class="col-xl-4 col-sm-6 col-6">
-                                                        <div class="chart-stat">
-                                                            <p class="mb-1">Total Withdrawal</p>
-                                                            <strong>N1,342,900</strong>
+                                                    <div className="col-xl-4 col-sm-6 col-6">
+                                                        <div className="chart-stat">
+                                                            <p className="mb-1">Total Withdrawal</p>
+    <strong>{totalWithdrawals}</strong>
                                                         </div>
                                                     </div>
-                                                    <div class="col-xl-4 col-sm-6 col-6">
-                                                        <div class="chart-stat">
-                                                            <p class="mb-1">Lowest Hold</p>
+                                                    <div className="col-xl-4 col-sm-6 col-6">
+                                                        <div className="chart-stat">
+                                                            <p className="mb-1">Lowest Hold</p>
                                                             <strong>32 Days</strong>
                                                         </div>
                                                     </div>
-                                                    <div class="col-xl-4 col-sm-6 col-6">
-                                                        <div class="chart-stat">
-                                                            <p class="mb-1">Highest Hold</p>
+                                                    <div className="col-xl-4 col-sm-6 col-6">
+                                                        <div className="chart-stat">
+                                                            <p className="mb-1">Highest Hold</p>
                                                             <strong>88 Days</strong>
                                                         </div>
                                                     </div>
-                                                    <div class="col-xl-4 col-sm-6 col-6">
-                                                        <div class="chart-stat">
-                                                            <p class="mb-1">Transactions </p>
-                                                            <strong>73% / 27% </strong>
+                                                    <div className="col-xl-4 col-sm-6 col-6">
+                                                        <div className="chart-stat">
+                                                            <p className="mb-1">Transactions </p>
+    <strong>{percentageSavings}% / {percentageWithdrawal}% </strong>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -210,9 +272,7 @@ function Dashboard() {
                         </div>
                     </div>
                 </div>
-            </div>
-
-
+            </div>)}
         </>
     )
 }
