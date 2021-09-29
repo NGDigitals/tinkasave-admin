@@ -655,7 +655,7 @@ class AreaChart extends Component {
             }],
             options: {
                 chart: {
-                    type: "area",
+                    type: props.type,
                     height: 300,
                     foreColor: "#8C87C2",
                     fontFamily: 'Rubik, sans-serif',

@@ -79,6 +79,7 @@ function Buddie() {
                                                         </th>
                                                         <th>Amount</th>
                                                         <th>Date & Time</th>
+                                                        <th>Status</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -101,6 +102,9 @@ function Buddie() {
                                                                 />
                                                             </td>
                                                             <td>{t.created_at}</td>
+                                                            <td className={`${t.status.toLowerCase() === 'completed' ? 'text-success' : 'text-warning'}`}>
+                                                                {t.status}
+                                                            </td>
                                                         </tr>
                                                     ))}
                                                 </tbody>

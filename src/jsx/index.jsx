@@ -2,14 +2,23 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Dashboard from './pages/index';
 import BuySell from './pages/buy-sell';
-import Users from './pages/users/users';
 import Accounts from './pages/accounts';
+
 import Airtime from './pages/services/airtime';
 import ATM from './pages/services/atm';
-import GSave from './pages/services/gsave';
+import Group from './pages/services/group';
 import Buddie from './pages/services/buddie';
 import Smooth from './pages/services/smooth';
 import Kids from './pages/services/kids';
+
+import Users from './pages/users';
+import UserAirtime from './pages/users/airtime';
+import UserATM from './pages/users/atm';
+import UserGroup from './pages/users/group';
+import UserBuddie from './pages/users/buddie';
+import UserSmooth from './pages/users/smooth';
+import UserKids from './pages/users/kids';
+
 import Settings from './pages/settings';
 import Preferences from './pages/settings-preferences';
 import SettingsSecurity from './pages/settings-security';
@@ -33,23 +42,31 @@ import VerifyStep6 from './pages/verify-step-6';
 import History from './pages/history';
 import Demo from './pages/demo';
 import Landing from './pages/landing';
+
 class Index extends Component {
     render() {
         return (
             <>
-                <BrowserRouter basename={'/cheerio_react/'}>
+                <BrowserRouter basename={'/'}>
                     <div id="main-wrapper">
                         <Switch>
                             <Route path='/' exact component={Dashboard} />
 
-                            <Route path='/users/users' component={Users} />
+                            <Route path='/users/list' component={Users} />
+                            <Route path='/users/:id/airtime' component={UserAirtime} />
+                            <Route path='/users/:id/atm' component={UserATM} />
+                            <Route path='/users/:id/buddie' component={UserBuddie} />
+                            <Route path='/users/:id/group' component={UserGroup} />
+                            <Route path='/users/:id/smooth' component={UserSmooth} />
+                            <Route path='/users/:id/kids' component={UserKids} />
 
                             <Route path='/services/airtime' component={Airtime} />
                             <Route path='/services/atm' component={ATM} />
                             <Route path='/services/buddie' component={Buddie} />
-                            <Route path='/services/gsave' component={GSave} />
+                            <Route path='/services/group' component={Group} />
                             <Route path='/services/smooth' component={Smooth} />
                             <Route path='/services/kids' component={Kids} />
+
 
                             <Route path='/buy-sell' component={BuySell} />
                             <Route path='/accounts' component={Accounts} />

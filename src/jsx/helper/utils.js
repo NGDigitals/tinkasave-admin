@@ -22,3 +22,13 @@ export const getCurrentUser = () => {
   }
   return user;
 };
+
+export const useQueryParams = () => {
+  // const windowUrl = window.location.search;
+  // const params = new URLSearchParams(windowUrl);
+  const params = new URLSearchParams(
+    window ? window.location.search : {}
+  );
+  return params;
+
+};

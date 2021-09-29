@@ -92,7 +92,7 @@ function Dashboard() {
                                                     <div className="widget-stat">
                                                         <div className="coin-title">
                                                             <h5 className="d-inline-block ml-0 mb-2">
-                                                            <strong><Link to="/services/airtime">Airtime Savings
+                                                            <strong><Link to="/services/airtime">Airtime/Data Savings
                                                                 {/*<span>{' '}(24h)</span>*/}</Link></strong>
                                                             </h5>
                                                         </div>
@@ -156,7 +156,7 @@ function Dashboard() {
                                                     <div className="widget-stat">
                                                         <div className="coin-title">
                                                             <h5 className="d-inline-block ml-0 mb-2">
-                                                            <strong><Link to="/services/gsave">Tinka GSave
+                                                            <strong><Link to="/services/group">Tinka GSave
                                                                 {/*<span>{' '}(24h)</span>*/}</Link></strong>
                                                             </h5>
                                                         </div>
@@ -224,7 +224,7 @@ function Dashboard() {
                                             </div>
                                         </div>
                                         <div className="card-body">
-                                            <AreaChart savings={savingsTransactions} withdrawals={withdrawalsTransactions} />
+                                            <AreaChart type="area" savings={savingsTransactions} withdrawals={withdrawalsTransactions} />
                                             <div className="chart-content text-center mt-3">
                                                 <div className="row">
                                                     <div className="col-xl-4 col-sm-6 col-6">
@@ -267,6 +267,9 @@ function Dashboard() {
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div className="col-xl-12 col-lg-12 col-xxl-12">
+                                <AreaChart type="area" savings={savingsTransactions} withdrawals={withdrawalsTransactions} />
                                 </div>
                             </div>
                         </div>

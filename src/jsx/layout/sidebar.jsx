@@ -18,7 +18,7 @@ function Sidebar() {
                                 <span><i className="icofont-ui-home"></i></span>
                             </Link>
                         </li>
-                        <li><Link to={"/users/users"} data-toggle="tooltip" data-placement="right" title="Buy Sale">
+                        <li><Link to={"/users/list"} data-toggle="tooltip" data-placement="right" title="Users">
                             <span><i className="icofont-users"></i></span>
                         </Link>
                         </li>

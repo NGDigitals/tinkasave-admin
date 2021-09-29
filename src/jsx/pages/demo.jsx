@@ -2,15 +2,11 @@ import React, { } from 'react';
 import { Link } from 'react-router-dom';
 import Header1 from '../layout/header1';
 
-
-
-
 function Demo() {
 
     return (
         <>
             <Header1 />
-
             <div className="intro section-padding position-relative" id="intro">
                 <div className="container">
                     <div className="row align-items-center justify-content-between">

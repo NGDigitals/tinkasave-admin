@@ -6,7 +6,7 @@ import { getCurrentUser } from '../helper/utils';
 const URL = `${config.url}/api/v1/x-admin`;
 
 class DashboardService {
-  fetchDashboard(authorization) {
+  fetchDashboard() {
     const currentUser = getCurrentUser();
     return axios.get(`${URL}/dashboard/`, {
       // headers: {

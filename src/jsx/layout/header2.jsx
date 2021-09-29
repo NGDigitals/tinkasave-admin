@@ -2,9 +2,7 @@ import React, { } from 'react';
 import { Link } from 'react-router-dom';
 import { DropdownButton, } from 'react-bootstrap'
 
-
-
-function Header2() {
+function Header2({ search }) {
 
     return (
         <>
@@ -21,7 +19,7 @@ function Header2() {
                                     </Link>
                                     <form>
                                         <div className="input-group">
-                                            <input type="text" className="form-control" placeholder="Search" />
+                                            <input type="text" className="form-control" placeholder="Search" onKeyUp={(e) => search(e.target.value)} />
                                             <div className="input-group-append">
                                                 <span className="input-group-text" id="basic-addon2"><i
                                                     className="fa fa-search"></i></span>

@@ -3,7 +3,7 @@ const environment = 'dev';
 const config = {
   url: environment.localeCompare('prod') === 0
     ? 'https://admin.k8s.tinkasave.com'
-    : (environment.localeCompare('test') === 0 ? 'http://auth-env.eu-west-2.elasticbeanstalk.com' : 'http://localhost:9010'),
+    : (environment.localeCompare('test') === 0 ? 'http://admin-env.eu-west-2.elasticbeanstalk.com' : 'http://localhost:9010'),
   currency: '₦',
   countryCode: '+234',
   paystackPublicKey: 'pk_test_2e86edd5a5181359315b56d9773ade6a74db0d1f',
