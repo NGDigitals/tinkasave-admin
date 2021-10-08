@@ -33,6 +33,15 @@ class UserService {
       // },
     });
   }
+
+  fetchReferral(userID, page, limit) {
+    const currentUser = getCurrentUser();
+    return axios.get(`${URL}/users/${userID}/referral/${page}/${limit}`, {
+      // headers: {
+      //   Authorization: currentUser.authorization,
+      // },
+    });
+  }
 }
 
 export default new UserService();

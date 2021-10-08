@@ -18,6 +18,7 @@ import UserGroup from './pages/users/group';
 import UserBuddie from './pages/users/buddie';
 import UserSmooth from './pages/users/smooth';
 import UserKids from './pages/users/kids';
+import UserReferral from './pages/users/referral';
 
 import Settings from './pages/settings';
 import Preferences from './pages/settings-preferences';
@@ -59,6 +60,7 @@ class Index extends Component {
                             <Route path='/users/:id/group' component={UserGroup} />
                             <Route path='/users/:id/smooth' component={UserSmooth} />
                             <Route path='/users/:id/kids' component={UserKids} />
+                            <Route path='/users/:id/referral' component={UserReferral} />
 
                             <Route path='/services/airtime' component={Airtime} />
                             <Route path='/services/atm' component={ATM} />

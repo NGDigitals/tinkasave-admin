@@ -54,7 +54,6 @@ function Users() {
                     content, is_last, current_page,
                   } = response.data.result;
                 setIsLast(is_last);
-                console.log('res', page, content)
                 setUsers(page === 0 ? [...content] : [...users, ...content]);
                 setCurrentPage(current_page + 1);
                 setIsLoading(false);
