@@ -13,3 +13,7 @@
 .dashboard-widget-card{
     padding: 15px !important;
 }
+
+.form-error{
+    color: #ff0000 !important;
+}

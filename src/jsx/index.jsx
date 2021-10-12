@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+import Signin from './pages/auth/signin';
+
 import Dashboard from './pages/index';
 import BuySell from './pages/buy-sell';
 import Accounts from './pages/accounts';
@@ -31,8 +34,7 @@ import Otp1 from './pages/otp-1';
 import Otp2 from './pages/otp-2';
 import PrivacyPolicy from './pages/privacy-policy';
 import Reset from './pages/reset';
-import Signin from './pages/signin';
-import Signup from './pages/signup';
+
 import TermsCondition from './pages/terms-condition';
 import VerifyStep1 from './pages/verify-step-1';
 import VerifyStep2 from './pages/verify-step-2';
@@ -53,6 +55,8 @@ class Index extends Component {
                         <Switch>
                             <Route path='/' exact component={Dashboard} />
 
+                            <Route path='/auth/signin' component={Signin} />
+
                             <Route path='/users/list' component={Users} />
                             <Route path='/users/:id/airtime' component={UserAirtime} />
                             <Route path='/users/:id/atm' component={UserATM} />
@@ -69,7 +73,6 @@ class Index extends Component {
                             <Route path='/services/smooth' component={Smooth} />
                             <Route path='/services/kids' component={Kids} />
 
-
                             <Route path='/buy-sell' component={BuySell} />
                             <Route path='/accounts' component={Accounts} />
                             <Route path='/settings' component={Settings} />
@@ -83,8 +86,7 @@ class Index extends Component {
                             <Route path='/otp-2' component={Otp2} />
                             <Route path='/privacy-policy' component={PrivacyPolicy} />
                             <Route path='/reset' component={Reset} />
-                            <Route path='/signin' component={Signin} />
-                            <Route path='/signup' component={Signup} />
+                            
                             <Route path='/terms-condition' component={TermsCondition} />
                             <Route path='/verify-step-1' component={VerifyStep1} />
                             <Route path='/verify-step-2' component={VerifyStep2} />

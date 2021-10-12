@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { isEmpty } from 'lodash';
 import { Alert, Button, Spinner} from 'react-bootstrap'
-import AuthService from '../services/AuthService';
+import AuthService from '../../services/AuthService';
 
 function Signin() {
     const isRendered = useRef(false);
@@ -27,15 +27,15 @@ function Signin() {
         if (!isEmpty(errors)) {
           setErrors(errors);
         } else {
-            // if (navigator.onLine) {
+            if (navigator.onLine) {
                 const data = {
                     email,
                     password,
                 };
                 login(data);
-            // } else {
-            //     setError("No internet connection");
-            // }
+            } else {
+                setError("No internet connection");
+            }
         }
     };
 
@@ -43,19 +43,19 @@ function Signin() {
         try {
             setIsSubmitting(true);
             const response = await AuthService.login(data);
-            // console.log('Res', response)
-            // if (isRendered.current) {
-            //     // setIsSubmitting(false);
-            //     if(response.data.success){
-            //     }else{
-            //         setError(response.data.message)
-            //     }
-            // }
+            console.log('Res', response)
+            if (isRendered.current) {
+                setIsSubmitting(false);
+                if(response.data.success){
+                }else{
+                    setError(response.data.message)
+                }
+            }
         } catch (error) {
             console.log('Error', error)
-        //   if (isRendered.current) {
-            // setIsSubmitting(false);
-        //   }
+            if (isRendered.current) {
+                setIsSubmitting(false);
+            }
         }
     };
 
@@ -66,7 +66,7 @@ function Signin() {
                     <div className="row justify-content-center h-100 align-items-center">
                         <div className="col-xl-5 col-md-6">
                             <div className="mini-logo text-center my-5">
-                                <Link to={'./'}><img src={require('./../../images/logo.png')} alt="" /></Link>
+                                <Link to={'./'}><img src={require('./../../../images/logo.png')} alt="" /></Link>
                             </div>
                             <div className="auth-form card">
                                 <div className="card-header justify-content-center">
@@ -74,7 +74,7 @@ function Signin() {
                                 </div>
                                 <div className="card-body">
                                     <form method="post" name="myform" className="signin_validate" action="#">
-                                        {error && (
+                                        {!isSubmitting && error && (
                                             <Alert variant={'danger'}>
                                                 {error}
                                             </Alert>
@@ -82,13 +82,13 @@ function Signin() {
                                         <div className="form-group">
                                             <label>Email</label>
                                             <input type="email" className="form-control" placeholder="Email Address"
-                                                name="email" onKeyUp={(value) => setEmail(value)} />
+                                                name="email" onKeyUp={(e) => setEmail(e.target.value)} />
                                             {errors && errors.email && <span className="form-error">{errors.email}</span>}
                                         </div>
                                         <div className="form-group">
                                             <label>Password</label>
                                             <input type="password" className="form-control" placeholder="Password"
-                                                name="password" onKeyUp={(value) => setPassword(value)} />
+                                                name="password" onKeyUp={(e) => setPassword(e.target.value)} />
                                             {errors && errors.password && <span className="form-error">{errors.password}</span>}
                                         </div>
                                         <div className="form-row d-flex justify-content-between mt-4 mb-2">
