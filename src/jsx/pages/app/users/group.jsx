@@ -2,15 +2,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import NumberFormat from 'react-number-format';
 import { useParams } from "react-router-dom";
-import Header2 from '../../layout/header2';
-import Sidebar from '../../layout/sidebar';
-import PageTitle from '../../element/page-title';
-import config from '../../helper/config';
-import UserService from '../../services/UserService';
+import Header2 from '../../../layout/header2';
+import Sidebar from '../../../layout/sidebar';
+import PageTitle from '../../../element/page-title';
+import config from '../../../helper/config';
+import UserService from '../../../services/UserService';
 
-const SERVICE_NAME = 'smooth';
+const SERVICE_NAME = 'group';
 
-function Smooth() {
+function Group() {
 
     const { id } = useParams();
     const isRendered = useRef(false);
@@ -59,7 +59,7 @@ function Smooth() {
                         <div className="col-xl-12">
                             <div className="card">
                                 <div className="card-header border-0">
-                                    <h4 className="card-title">{user.first_name + ' ' + user.last_name} - Tinka Smooth</h4>
+                                    <h4 className="card-title">{user.first_name + ' ' + user.last_name} - Tinka GSave</h4>
                                 </div>
                                 <div className="card-body pt-0">
                                     <div className="transaction-table">
@@ -75,6 +75,7 @@ function Smooth() {
                                                         <th>Balance</th>
                                                         <th>Maturity Date</th>
                                                         <th>Mode</th>
+                                                        <th>Owned</th>
                                                         <th>Status</th>
                                                         {/* <th>Date & Time</th> */}
                                                     </tr>
@@ -145,6 +146,7 @@ function Smooth() {
                                                             </td>
                                                             <td>{s.maturity_date}</td>
                                                             <td>{s.mode}</td>
+                                                            <td>{s.is_owned ? 'Yes' : 'No'}</td>
                                                             <td>{s.status}</td>
                                                             {/* <td>{s.created_at}</td> */}
                                                         </tr>
@@ -163,4 +165,4 @@ function Smooth() {
     )
 }
 
-export default Smooth;
+export default Group;

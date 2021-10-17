@@ -3,11 +3,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import NumberFormat from 'react-number-format';
 import { useParams } from "react-router-dom";
 import { Line } from 'rc-progress';
-import Header2 from '../../layout/header2';
-import Sidebar from '../../layout/sidebar';
-import PageTitle from '../../element/page-title';
-import config from '../../helper/config';
-import UserService from '../../services/UserService';
+import Header2 from '../../../layout/header2';
+import Sidebar from '../../../layout/sidebar';
+import PageTitle from '../../../element/page-title';
+import config from '../../../helper/config';
+import UserService from '../../../services/UserService';
 
 const LIMIT = 25;
 

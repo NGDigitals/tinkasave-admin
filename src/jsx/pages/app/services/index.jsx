@@ -3,12 +3,10 @@ import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ReactRoundedImage from "react-rounded-image";
 import { Button, Modal} from 'react-bootstrap';
-import Popup from "reactjs-popup";
-import useModal from 'use-react-modal'
-import Header2 from '../../layout/header2';
-import Sidebar from '../../layout/sidebar';
-import PageTitle from '../../element/page-title';
-import UserService from '../../services/UserService';
+import Header2 from '../../../layout/header2';
+import Sidebar from '../../../layout/sidebar';
+import PageTitle from '../../../element/page-title';
+import UserService from '../../../services/UserService';
 
 // import SettingsNav from '../../element/settings-nav';
 

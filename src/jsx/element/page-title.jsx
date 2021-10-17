@@ -1,8 +1,10 @@
 import React, { } from 'react';
-
-
+import { isEmpty } from 'lodash';
+import { getCurrentUser } from '../helper/utils';
 
 function PageTitle() {
+
+    const currentUser = getCurrentUser();
 
     return (
         <>
@@ -12,7 +14,7 @@ function PageTitle() {
                         <div className="col-xl-12">
                             <div className="page_title-content">
                                 <p>Welcome Back,
-                                <span> Yemi</span>
+                                <span> {!isEmpty(currentUser) && currentUser.first_name}</span>
                                 </p>
                             </div>
                         </div>

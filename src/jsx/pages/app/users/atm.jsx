@@ -2,15 +2,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import NumberFormat from 'react-number-format';
 import { useParams } from "react-router-dom";
-import Header2 from '../../layout/header2';
-import Sidebar from '../../layout/sidebar';
-import PageTitle from '../../element/page-title';
-import config from '../../helper/config';
-import UserService from '../../services/UserService';
+import Header2 from '../../../layout/header2';
+import Sidebar from '../../../layout/sidebar';
+import PageTitle from '../../../element/page-title';
+import config from '../../../helper/config';
+import UserService from '../../../services/UserService';
 
-const SERVICE_NAME = 'kid';
+const SERVICE_NAME = 'atm';
 
-function Kid() {
+function ATM() {
 
     const { id } = useParams();
     const isRendered = useRef(false);
@@ -59,7 +59,7 @@ function Kid() {
                         <div className="col-xl-12">
                             <div className="card">
                                 <div className="card-header border-0">
-                                    <h4 className="card-title">{user.first_name + ' ' + user.last_name} - Tinka Kids</h4>
+                                    <h4 className="card-title">{user.first_name + ' ' + user.last_name} - Tinka Spend</h4>
                                 </div>
                                 <div className="card-body pt-0">
                                     <div className="transaction-table">
@@ -85,7 +85,7 @@ function Kid() {
                                                             <td>{s.name}</td>
                                                             <td>
                                                                 <NumberFormat
-                                                                    value={s.recurring_amount}
+                                                                    value={s.amount}
                                                                     className="foo"
                                                                     displayType={'text'}
                                                                     thousandSeparator={true}
@@ -163,4 +163,4 @@ function Kid() {
     )
 }
 
-export default Kid;
+export default ATM;

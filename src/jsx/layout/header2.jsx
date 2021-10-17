@@ -1,8 +1,15 @@
 import React, { } from 'react';
 import { Link } from 'react-router-dom';
+import { isEmpty } from 'lodash';
 import { DropdownButton, } from 'react-bootstrap'
+import { setCurrentUser, getCurrentUser } from '../helper/utils';
 
 function Header2({ search }) {
+    const currentUser = getCurrentUser();
+    const logout = () => {
+        setCurrentUser();
+        window.location.reload();
+    }
 
     return (
         <>
@@ -32,17 +39,17 @@ function Header2({ search }) {
                                     <div className="d-flex align-items-center">
                                         <DropdownButton
                                             alignRight
-                                            title="Yemi Oyelaran"
+                                            title={!isEmpty(currentUser) && currentUser.first_name}
                                             className="profile_log"
                                         >
                                             <Link to={'./accounts'} className="dropdown-item">
                                                 <i className="la la-user"></i> Account
                                             </Link>
-                                            <Link to={'./lock'} className="dropdown-item">
+                                            {/* <Link to={'./lock'} className="dropdown-item">
                                                 <i className="la la-lock"></i> Lock
-                                            </Link>
-                                            <Link to={'./signin'} className="dropdown-item logout">
-                                                <i className="la la-sign-out"></i> Logout
+                                            </Link> */}
+                                            <Link to={'#'} className="dropdown-item logout" onClick={() => logout()}>
+                                                <i className="la la-sign-out-alt"></i> Logout
                                             </Link>
                                         </DropdownButton>
                                     </div>

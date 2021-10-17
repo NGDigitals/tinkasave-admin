@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from 'react';
 import NumberFormat from 'react-number-format';
-import Header2 from '../../layout/header2';
-import Sidebar from '../../layout/sidebar';
-import PageTitle from '../../element/page-title';
-import config from '../../helper/config';
-import DashboardService from '../../services/DashboardService';
+import Header2 from '../../../layout/header2';
+import Sidebar from '../../../layout/sidebar';
+import PageTitle from '../../../element/page-title';
+import config from '../../../helper/config';
+import DashboardService from '../../../services/DashboardService';
 
 const LIMIT = 25;
-const SERVICE_NAME = 'kid';
+const SERVICE_NAME = 'airtime';
 
-function Kid() {
+function Airtime() {
 
     const isRendered = useRef(false);
     const [transactions, setTransactions] = useState([]);
@@ -62,7 +62,7 @@ function Kid() {
                         <div className="col-xl-12">
                             <div className="card">
                                 <div className="card-header border-0">
-                                    <h4 className="card-title">Tinka Kids</h4>
+                                    <h4 className="card-title">Tinka Airtime/Data</h4>
                                 </div>
                                 <div className="card-body pt-0">
                                     <div className="transaction-table">
@@ -101,10 +101,10 @@ function Kid() {
                                                                 renderText={(value, props) => <div {...props}>{value}</div>}
                                                                 />
                                                             </td>
-                                                            <td>{t.created_at}</td>
                                                             <td className={`${t.status.toLowerCase() === 'completed' ? 'text-success' : 'text-warning'}`}>
                                                                 {t.status}
                                                             </td>
+                                                            <td>{t.created_at}</td>
                                                         </tr>
                                                     ))}
                                                 </tbody>
@@ -121,4 +121,4 @@ function Kid() {
     )
 }
 
-export default Kid;
+export default Airtime;

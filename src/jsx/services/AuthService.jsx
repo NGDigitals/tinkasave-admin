@@ -2,11 +2,27 @@
 import axios from 'axios';
 import config from '../helper/config';
 
-const URL = `${config.url}/api/v1/x-auth`;
+const URL = `${config.authUrl}/api/v1/x-auth`;
 
 class AuthService {
     login(data) {
         return axios.post(`${URL}/login`, data, {headers: {}});
+    }
+
+    verifyOTP(authorization, email, data) {
+        return axios.post(`${URL}/otp/verify/${email}`, data, {
+          headers: {
+            Authorization: authorization,
+          },
+        });
+    }
+
+    resendOTP(authorization, email) {
+        return axios.post(`${URL}/otp/resend/${email}`, {}, {
+          headers: {
+            Authorization: authorization,
+          },
+        });
     }
 }
 

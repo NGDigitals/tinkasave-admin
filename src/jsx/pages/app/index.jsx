@@ -3,15 +3,18 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-
-import Header2 from '../layout/header2';
-import Sidebar from '../layout/sidebar';
-import PageTitle from '../element/page-title';
-import AreaChart from '../charts/area';
-import DashboardService from '../services/DashboardService';
+import config from '../../helper/config';
+import Header2 from '../../layout/header2';
+import Sidebar from '../../layout/sidebar';
+import PageTitle from '../../element/page-title';
+import AreaChart from '../../charts/area';
+import DashboardService from '../../services/DashboardService';
 
 
 function Dashboard() {
+
+    const appPath = config.appPath;
+
     const isRendered = useRef(false);
     const [airtime, setAirtime] = useState({});
     const [atm, setATM] = useState({});
@@ -92,7 +95,7 @@ function Dashboard() {
                                                     <div className="widget-stat">
                                                         <div className="coin-title">
                                                             <h5 className="d-inline-block ml-0 mb-2">
-                                                            <strong><Link to="/services/airtime">Airtime/Data Savings
+                                                            <strong><Link to={`${appPath}/services/airtime`}>Airtime/Data Savings
                                                                 {/*<span>{' '}(24h)</span>*/}</Link></strong>
                                                             </h5>
                                                         </div>
@@ -114,7 +117,7 @@ function Dashboard() {
                                                     <div className="widget-stat">
                                                         <div className="coin-title">
                                                             <h5 className="d-inline-block ml-0 mb-2">
-                                                            <strong><Link to="/services/atm">Tinka Spend
+                                                            <strong><Link to={`${appPath}/services/atm`}>Tinka Spend
                                                                 {/*<span>{' '}(24h)</span>*/}</Link></strong>
                                                             </h5>
                                                         </div>
@@ -135,7 +138,7 @@ function Dashboard() {
                                                     <div className="widget-stat">
                                                         <div className="coin-title">
                                                             <h5 className="d-inline-block ml-0 mb-2">
-                                                            <strong><Link to="/services/buddie">Tinka Buddie
+                                                            <strong><Link to={`${appPath}/services/buddie`}>Tinka Buddie
                                                                 {/*<span>{' '}(24h)</span>*/}</Link></strong>
                                                             </h5>
                                                         </div>
@@ -156,7 +159,7 @@ function Dashboard() {
                                                     <div className="widget-stat">
                                                         <div className="coin-title">
                                                             <h5 className="d-inline-block ml-0 mb-2">
-                                                            <strong><Link to="/services/group">Tinka GSave
+                                                            <strong><Link to={`${appPath}/services/group`}>Tinka GSave
                                                                 {/*<span>{' '}(24h)</span>*/}</Link></strong>
                                                             </h5>
                                                         </div>
@@ -177,7 +180,7 @@ function Dashboard() {
                                                     <div className="widget-stat">
                                                         <div className="coin-title">
                                                             <h5 className="d-inline-block ml-0 mb-2">
-                                                            <strong><Link to="/services/smooth">Tinka Smooth
+                                                            <strong><Link to={`${appPath}/services/smooth`}>Tinka Smooth
                                                                 {/*<span>{' '}(24h)</span>*/}</Link></strong>
                                                             </h5>
                                                         </div>
@@ -198,7 +201,7 @@ function Dashboard() {
                                                     <div className="widget-stat">
                                                         <div className="coin-title">
                                                             <h5 className="d-inline-block ml-0 mb-2">
-                                                            <strong><Link to="/services/kids">Tinka Kids
+                                                            <strong><Link to={`${appPath}/services/kids`}>Tinka Kids
                                                                 {/*<span>{' '}(24h)</span>*/}</Link></strong>
                                                             </h5>
                                                         </div>

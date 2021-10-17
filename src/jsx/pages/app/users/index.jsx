@@ -3,17 +3,19 @@ import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {isEmpty, debounce} from 'lodash';
 import ReactRoundedImage from "react-rounded-image";
-import Header2 from '../../layout/header2';
-import Sidebar from '../../layout/sidebar';
-import PageTitle from '../../element/page-title';
-import UserService from '../../services/UserService';
+import config from '../../../helper/config';
+import Header2 from '../../../layout/header2';
+import Sidebar from '../../../layout/sidebar';
+import PageTitle from '../../../element/page-title';
+import UserService from '../../../services/UserService';
 
 // import SettingsNav from '../../element/settings-nav';
 
 const LIMIT = 25;
 
 function Users() {
-
+    const appPath = config.appPath;
+    
     const isRendered = useRef(false);
     const [users, setUsers] = useState([]);
     const [keyword, setKeyword] = useState();
@@ -108,28 +110,28 @@ function Users() {
                                                                 {/* <p><span>{u.phone}, </span><span>{u.email}</span></p> */}
                                                                 {/* <h6 className="mt-1 mb-1">Last Login: 12th June, 2021 10:03AM</h6> */}
                                                                 <div className="verified mt-1 mb-1">
-                                                                    <span><i className="la la-check"></i><Link to={`/users/${u.id}/referral`}>Bonus ({u.bonus}), Total Savings ({u.total_savings})</Link></span>
+                                                                    <span><i className="la la-check"></i><Link to={`${appPath}/users/${u.id}/referral`}>Bonus ({u.bonus}), Total Savings ({u.total_savings})</Link></span>
                                                                 </div>
                                                                 <div className="verified mt-1 mb-1">
-                                                                    <span><i className="la la-check"></i><Link to={`/users/${u.id}/referral`}>Referrals ({u.count.referral})</Link></span>
+                                                                    <span><i className="la la-check"></i><Link to={`${appPath}/users/${u.id}/referral`}>Referrals ({u.count.referral})</Link></span>
                                                                 </div>
                                                                 <div className="verified mt-1 mb-1">
-                                                                    <span><i className="la la-check"></i><Link to={`/users/${u.id}/airtime`}>Airtime/Data Savings ({u.count.airtime})</Link></span>
+                                                                    <span><i className="la la-check"></i><Link to={`${appPath}/users/${u.id}/airtime`}>Airtime/Data Savings ({u.count.airtime})</Link></span>
                                                                 </div>
                                                                 <div className="verified mt-1 mb-1">
-                                                                    <span><i className="la la-check"></i><Link to={`/users/${u.id}/atm`}>Tinka Spend ({u.count.atm})</Link></span>
+                                                                    <span><i className="la la-check"></i><Link to={`${appPath}/users/${u.id}/atm`}>Tinka Spend ({u.count.atm})</Link></span>
                                                                 </div>
                                                                 <div className="verified mt-1 mb-1">
-                                                                    <span><i className="la la-check"></i><Link to={`/users/${u.id}/buddie`}>Tinka Buddie ({u.count.buddie})</Link></span>
+                                                                    <span><i className="la la-check"></i><Link to={`${appPath}/users/${u.id}/buddie`}>Tinka Buddie ({u.count.buddie})</Link></span>
                                                                 </div>
                                                                 <div className="verified mt-1 mb-1">
-                                                                    <span><i className="la la-check"></i><Link to={`/users/${u.id}/group`}>Tinka GSave ({u.count.group})</Link></span>
+                                                                    <span><i className="la la-check"></i><Link to={`${appPath}/users/${u.id}/group`}>Tinka GSave ({u.count.group})</Link></span>
                                                                 </div>
                                                                 <div className="verified mt-1 mb-1">
-                                                                    <span><i className="la la-check"></i><Link to={`/users/${u.id}/smooth`}>Tinka Smooth ({u.count.smooth})</Link></span>
+                                                                    <span><i className="la la-check"></i><Link to={`${appPath}/users/${u.id}/smooth`}>Tinka Smooth ({u.count.smooth})</Link></span>
                                                                 </div>
                                                                 <div className="verified mt-1 mb-1">
-                                                                    <span><i className="la la-check"></i><Link to={`/users/${u.id}/kids`}>Tinka Kids ({u.count.kid})</Link></span>
+                                                                    <span><i className="la la-check"></i><Link to={`${appPath}/users/${u.id}/kids`}>Tinka Kids ({u.count.kid})</Link></span>
                                                                 </div>
                                                             </div>
                                                             <div className="edit-optio">

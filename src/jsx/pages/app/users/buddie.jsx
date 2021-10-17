@@ -1,24 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from 'react';
 import NumberFormat from 'react-number-format';
+import isEmpty from 'lodash/isEmpty';
 import { useParams } from "react-router-dom";
-import Header2 from '../../layout/header2';
-import Sidebar from '../../layout/sidebar';
-import PageTitle from '../../element/page-title';
-import config from '../../helper/config';
-import UserService from '../../services/UserService';
+import Header2 from '../../../layout/header2';
+import Sidebar from '../../../layout/sidebar';
+import PageTitle from '../../../element/page-title';
+import config from '../../../helper/config';
+import UserService from '../../../services/UserService';
 
-const SERVICE_NAME = 'airtime';
+const SERVICE_NAME = 'buddie';
 
-function Airtime() {
-
+function Buddie() {
     const { id } = useParams();
     const isRendered = useRef(false);
     const [user, setUser] = useState({});
     const [services, setServices] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-
+    
     useEffect(() => {
         isRendered.current = true;
         /*if (navigator.onLine) {*/fetchData(0)/*}*/
@@ -27,7 +27,7 @@ function Airtime() {
         };
     }, []);
 
-    const fetchData = async (page) => {
+    const fetchData = async () => {
         try {
             setIsLoading(true);
             const response = await UserService.fetchServices(SERVICE_NAME, id);
@@ -52,14 +52,14 @@ function Airtime() {
             <Header2 />
             <Sidebar />
             <PageTitle />
-            {(!isLoading && isLoaded) && (
+            {(!isLoading && isLoaded && !isEmpty(services)) && (
             <div className="content-body">
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-xl-12">
                             <div className="card">
                                 <div className="card-header border-0">
-                                    <h4 className="card-title">{user.first_name + ' ' + user.last_name} - Tinka Airtime/Data</h4>
+                                    <h4 className="card-title">{user.first_name + ' ' + user.last_name} - Tinka Buddie</h4>
                                 </div>
                                 <div className="card-body pt-0">
                                     <div className="transaction-table">
@@ -163,4 +163,4 @@ function Airtime() {
     )
 }
 
-export default Airtime;
+export default Buddie;

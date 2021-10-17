@@ -1,11 +1,14 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { isEmpty } from 'lodash';
+import { useHistory } from "react-router-dom";
 import { Alert, Button, Spinner} from 'react-bootstrap'
 import AuthService from '../../services/AuthService';
+import messages from '../../helper/messages';
 
 function Signin() {
     const isRendered = useRef(false);
+    const history = useHistory();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [error, setError] = useState();
@@ -21,9 +24,10 @@ function Signin() {
 
     const onPress = () => {
         const errors = {};
+        setError();
         setErrors(errors);
-        if (isEmpty(email)) errors.email = "Email address is required";
-        if (isEmpty(password)) errors.password = "Password is required";
+        if (isEmpty(email)) errors.email = messages.emailRequired;
+        if (isEmpty(password)) errors.password = messages.passwordRequired;
         if (!isEmpty(errors)) {
           setErrors(errors);
         } else {
@@ -33,9 +37,8 @@ function Signin() {
                     password,
                 };
                 login(data);
-            } else {
+            } else
                 setError("No internet connection");
-            }
         }
     };
 
@@ -43,16 +46,18 @@ function Signin() {
         try {
             setIsSubmitting(true);
             const response = await AuthService.login(data);
-            console.log('Res', response)
             if (isRendered.current) {
                 setIsSubmitting(false);
                 if(response.data.success){
+                    const message = response.data.message;
+                    const user = response.data.result;
+                    history.push('/auth/otp', {message: message, user: user});
                 }else{
                     setError(response.data.message)
                 }
             }
         } catch (error) {
-            console.log('Error', error)
+            setError(messages.unknownError)
             if (isRendered.current) {
                 setIsSubmitting(false);
             }
@@ -92,13 +97,6 @@ function Signin() {
                                             {errors && errors.password && <span className="form-error">{errors.password}</span>}
                                         </div>
                                         <div className="form-row d-flex justify-content-between mt-4 mb-2">
-                                            {/* <div className="form-group mb-0">
-                                                <label className="toggle">
-                                                    <input className="toggle-checkbox" type="checkbox" />
-                                                    <span className="toggle-switch"></span>
-                                                    <span className="toggle-label">Remember me</span>
-                                                </label>
-                                            </div> */}
                                             <div className="form-group mb-0">
                                                 <Link to="/reset">Forgot Password?</Link>
                                             </div>

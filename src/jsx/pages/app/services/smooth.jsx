@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from 'react';
 import NumberFormat from 'react-number-format';
-import Header2 from '../../layout/header2';
-import Sidebar from '../../layout/sidebar';
-import PageTitle from '../../element/page-title';
-import config from '../../helper/config';
-import DashboardService from '../../services/DashboardService';
+import Header2 from '../../../layout/header2';
+import Sidebar from '../../../layout/sidebar';
+import PageTitle from '../../../element/page-title';
+import config from '../../../helper/config';
+import DashboardService from '../../../services/DashboardService';
 
 const LIMIT = 25;
-const SERVICE_NAME = 'group';
+const SERVICE_NAME = 'smooth';
 
-function Group() {
+function Smooth() {
 
     const isRendered = useRef(false);
     const [transactions, setTransactions] = useState([]);
@@ -62,7 +62,7 @@ function Group() {
                         <div className="col-xl-12">
                             <div className="card">
                                 <div className="card-header border-0">
-                                    <h4 className="card-title">Tinka GSave</h4>
+                                    <h4 className="card-title">Tinka Smooth</h4>
                                 </div>
                                 <div className="card-body pt-0">
                                     <div className="transaction-table">
@@ -121,4 +121,4 @@ function Group() {
     )
 }
 
-export default Group;
+export default Smooth;
