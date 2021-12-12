@@ -5,7 +5,6 @@ import { getCurrentUser } from '../helper/utils';
 function PageTitle() {
 
     const currentUser = getCurrentUser();
-
     return (
         <>
             <div className="page_title">

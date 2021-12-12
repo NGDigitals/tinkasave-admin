@@ -23,6 +23,15 @@ class DashboardService {
       },
     });
   }
+
+  searchTransactions(keyword, page, limit) {
+    const currentUser = getCurrentUser();
+    return axios.post(`${URL}/transactions/${page}/${limit}`, {keyword: keyword}, {
+      headers: {
+        Authorization: currentUser.authorization,
+      },
+    });
+  }
 }
 
 export default new DashboardService();

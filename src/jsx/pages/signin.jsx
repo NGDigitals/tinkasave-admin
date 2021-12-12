@@ -43,7 +43,6 @@ function Signin() {
         try {
             setIsSubmitting(true);
             const response = await AuthService.login(data);
-            // console.log('Res', response)
             // if (isRendered.current) {
             //     // setIsSubmitting(false);
             //     if(response.data.success){
@@ -52,7 +51,6 @@ function Signin() {
             //     }
             // }
         } catch (error) {
-            console.log('Error', error)
         //   if (isRendered.current) {
             // setIsSubmitting(false);
         //   }

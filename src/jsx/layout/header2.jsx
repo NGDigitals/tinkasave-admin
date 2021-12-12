@@ -19,14 +19,14 @@ function Header2({ search }) {
                         <div className="col-xl-12">
                             <nav className="navbar navbar-expand-lg navbar-light px-0 justify-content-between">
                                 {/* <Link className="navbar-brand" to={'/'}><img src={require('./../../images/logo.png')} alt="" /></Link> */}
-
                                 <div className="header-search d-flex align-items-center">
                                     <Link className="brand-logo mr-3" to="/">
                                         <img src={require('./../../images/logo.png')} alt="" width="30" />
                                     </Link>
                                     <form>
                                         <div className="input-group">
-                                            <input type="text" className="form-control" placeholder="Search" onKeyUp={(e) => search(e.target.value)} />
+                                            <input type="text" className="form-control" placeholder="Search" 
+                                            onKeyUp={(e) => {if(typeof search === 'function') {search(e.target.value)}}} />
                                             <div className="input-group-append">
                                                 <span className="input-group-text" id="basic-addon2"><i
                                                     className="fa fa-search"></i></span>
@@ -42,9 +42,9 @@ function Header2({ search }) {
                                             title={!isEmpty(currentUser) && currentUser.first_name}
                                             className="profile_log"
                                         >
-                                            <Link to={'./accounts'} className="dropdown-item">
+                                            {/* <Link to={'./accounts'} className="dropdown-item">
                                                 <i className="la la-user"></i> Account
-                                            </Link>
+                                            </Link> */}
                                             {/* <Link to={'./lock'} className="dropdown-item">
                                                 <i className="la la-lock"></i> Lock
                                             </Link> */}

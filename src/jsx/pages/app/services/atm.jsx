@@ -102,7 +102,8 @@ function ATM() {
                                                                 />
                                                             </td>
                                                             <td>{t.created_at}</td>
-                                                            <td className={`${t.status.toLowerCase() === 'completed' ? 'text-success' : 'text-warning'}`}>
+                                                            <td className={`${t.status.toLowerCase() === 'completed' ? 'text-success' : 
+                                                                (t.status.toLowerCase() === 'failed' ? 'text-danger' : 'text-warning')}`}>
                                                                 {t.status}
                                                             </td>
                                                         </tr>

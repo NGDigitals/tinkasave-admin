@@ -3,6 +3,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {isEmpty, debounce} from 'lodash';
 import ReactRoundedImage from "react-rounded-image";
+import Pager from '../../../element/pager';
 import config from '../../../helper/config';
 import Header2 from '../../../layout/header2';
 import Sidebar from '../../../layout/sidebar';
@@ -11,7 +12,7 @@ import UserService from '../../../services/UserService';
 
 // import SettingsNav from '../../element/settings-nav';
 
-const LIMIT = 25;
+const LIMIT = 5;
 
 function Users() {
     const appPath = config.appPath;
@@ -21,9 +22,7 @@ function Users() {
     const [keyword, setKeyword] = useState();
     const [isLoaded, setIsLoaded] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [isLast, setIsLast] = useState(true);
-    const [currentPage, setCurrentPage] = useState(0);
-    // const { targetRef, openModal, closeModal, isOpen, Modal } = useModal()
+    const [totalItems, setTotalItems] = useState(0);
 
     // useEffect(() => {
     //     isRendered.current = true;
@@ -36,9 +35,9 @@ function Users() {
     useEffect(() => {
         isRendered.current = true;
         // if (!isEmpty(keyword)) {fetchData(0)}
-        /*if (navigator.onLine) {*/fetchData(0)/*}*/
+        if (navigator.onLine) {fetchData(0)}
         return () => {
-            setKeyword();
+            // setKeyword();
             isRendered.current = false;
         };
     }, [keyword]);
@@ -53,11 +52,10 @@ function Users() {
                 response = await UserService.fetch(page, LIMIT);
             if (isRendered.current) {
                 const {
-                    content, is_last, current_page,
+                    total, content,
                   } = response.data.result;
-                setIsLast(is_last);
-                setUsers(page === 0 ? [...content] : [...users, ...content]);
-                setCurrentPage(current_page + 1);
+                setUsers(content);
+                setTotalItems(total)
                 setIsLoading(false);
                 setIsLoaded(true);
             }
@@ -71,7 +69,6 @@ function Users() {
     };
 
     const search = debounce((keyword) => {
-        console.log('Key', keyword)
         setKeyword(keyword)
     }, 1000, false)
 
@@ -156,6 +153,15 @@ function Users() {
                             </div>
                         </div>
                     </div>
+                </div>
+                <div>
+                    {users &&
+                        <Pager
+                            getAllData={fetchData} 
+                            totalRecords={totalItems}
+                            activePage={0}
+                            itemsCountPerPage = {LIMIT} />
+                    }
                 </div>
             </div>)}
         </>

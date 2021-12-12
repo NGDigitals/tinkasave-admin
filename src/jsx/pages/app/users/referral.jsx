@@ -34,7 +34,6 @@ function Referral() {
         try {
             setIsLoading(true);
             const response = await UserService.fetchReferral(id, page, LIMIT);
-            console.log('Res', response)
             if (isRendered.current) {
                 if(response.data.success){
                     const { user, content,
@@ -48,7 +47,6 @@ function Referral() {
                 }
             }
         } catch (error) {
-            console.log('Error', error)
           if (isRendered.current) {
             setIsLoading(false);
             // if (error.response && error.response.status === 401)
@@ -87,7 +85,6 @@ function Referral() {
                                                 <tbody>
                                                     {users.map((u) => {
                                                         const percentage = (u.total_savings / (u.amount * 100)) * 100;
-                                                        console.log('Amount: ', percentage)
                                                         return (
                                                         <tr key={u.id}>
                                                             <td>{u.referred}</td>

@@ -2,7 +2,7 @@
 import axios from 'axios';
 import config from '../helper/config';
 
-const URL = `${config.authUrl}/api/v1/x-auth`;
+const URL = `${config.adminUrl}/api/v1/x-admin`;
 
 class AuthService {
     login(data) {

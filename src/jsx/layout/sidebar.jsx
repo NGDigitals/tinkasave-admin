@@ -28,14 +28,14 @@ function Sidebar() {
                             <span><i className="icofont-users"></i></span>
                         </Link>
                         </li>
-                        <li><Link to={'#'} data-toggle="tooltip" data-placement="right" title="Accounts">
+                        {/* <li><Link to={'#'} data-toggle="tooltip" data-placement="right" title="Accounts">
                             <span><i className="icofont-architecture-alt"></i></span>
                         </Link>
                         </li>
                         <li><Link to={'#'} data-toggle="tooltip" data-placement="right" title="Settings">
                             <span><i className="icofont-ui-settings"></i></span>
                         </Link>
-                        </li>
+                        </li> */}
                         <li className="logout"><Link to={'#'} data-toggle="tooltip" data-placement="right"
                             title="Signout" onClick={() => logout()}>
                             <span><i className="icofont-power"></i></span>

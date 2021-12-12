@@ -251,13 +251,13 @@ function Dashboard() {
                                                     <div className="col-xl-4 col-sm-6 col-6">
                                                         <div className="chart-stat">
                                                             <p className="mb-1">Lowest Hold</p>
-                                                            <strong>32 Days</strong>
+                                                            {/* <strong>32 Days</strong> */}
                                                         </div>
                                                     </div>
                                                     <div className="col-xl-4 col-sm-6 col-6">
                                                         <div className="chart-stat">
                                                             <p className="mb-1">Highest Hold</p>
-                                                            <strong>88 Days</strong>
+                                                            {/* <strong>88 Days</strong> */}
                                                         </div>
                                                     </div>
                                                     <div className="col-xl-4 col-sm-6 col-6">
@@ -271,9 +271,9 @@ function Dashboard() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-xl-12 col-lg-12 col-xxl-12">
+                                {/* <div className="col-xl-12 col-lg-12 col-xxl-12">
                                 <AreaChart type="area" savings={savingsTransactions} withdrawals={withdrawalsTransactions} />
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

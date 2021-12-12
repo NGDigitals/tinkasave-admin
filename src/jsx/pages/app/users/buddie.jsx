@@ -73,7 +73,6 @@ function Buddie() {
                                                         <th>Total Interests</th>
                                                         <th>Total Withdrawals</th>
                                                         <th>Balance</th>
-                                                        <th>Maturity Date</th>
                                                         <th>Mode</th>
                                                         <th>Status</th>
                                                         {/* <th>Date & Time</th> */}
@@ -143,7 +142,6 @@ function Buddie() {
                                                                 renderText={(value, props) => <div {...props}>{value}</div>}
                                                                 />
                                                             </td>
-                                                            <td>{s.maturity_date}</td>
                                                             <td>{s.mode}</td>
                                                             <td>{s.status}</td>
                                                             {/* <td>{s.created_at}</td> */}
