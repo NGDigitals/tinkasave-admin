@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import {isEmpty} from 'lodash';
+import Loader from "react-loader-spinner";
 import ReactRoundedImage from "react-rounded-image";
 import { Button, Modal} from 'react-bootstrap';
 import Header2 from '../../../layout/header2';
@@ -38,11 +40,11 @@ function Users() {
             const response = await UserService.fetch(page, LIMIT);
             if (isRendered.current) {
                 const {
-                    content, is_last, current_page,
+                    content, total,
                   } = response.data.result;
-                setIsLast(is_last);
                 setUsers(page === 0 ? [...content] : [...users, ...content]);
-                setCurrentPage(current_page + 1);
+                setCurrentPage(page);
+                setTotalItems(total)
                 setIsLoading(false);
                 setIsLoaded(true);
             }
@@ -69,7 +71,7 @@ function Users() {
             <Header2 />
             <Sidebar />
             <PageTitle />
-            {(!isLoading && isLoaded) && (
+            {(!isLoading && isLoaded && !isEmpty(users)) ? (
             <div className="content-body">
                 <div className="container-fluid">
                     <div className="row">
@@ -146,32 +148,25 @@ function Users() {
                                                 </div>
                                             </Modal>
                                         )} */}
-                                        <Modal show={showModal} onHide={() => closeModal()}>  
-                                            <Modal.Header>{modalData.first_name + ' ' + modalData.last_name}</Modal.Header>  
-                                            <Modal.Body>
-                                            <div className="content-body">
-                                                <div className="container-fluid">
-                                                    <div className="row">
-                                                        <div className="col-xl-9 col-md-8">
-                                                            
-                                                                This is a Modal Body
-                                                            
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            </Modal.Body>  
-                                            <Modal.Footer>  
-                                                <Button onClick={() => closeModal()}>Close</Button>  
-                                            </Modal.Footer>  
-                                        </Modal>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>)}
+            </div>) : <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginTop: 100,
+            }}>
+            <Loader
+                type="Puff"
+                color="#00BFFF"
+                height={100}
+                width={100}
+                timeout={0} //3 secs
+            /></div>}
         </>
     )
 }

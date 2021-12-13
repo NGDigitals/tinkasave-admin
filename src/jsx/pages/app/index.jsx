@@ -3,6 +3,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Loader from "react-loader-spinner";
 import config from '../../helper/config';
 import Header2 from '../../layout/header2';
 import Sidebar from '../../layout/sidebar';
@@ -31,7 +32,7 @@ function Dashboard() {
     const [savingsTransactions, setSavingsTransactions] = useState([]);
     const [withdrawalsTransactions, setWithdrawalsTransactions] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         isRendered.current = true;
@@ -81,7 +82,7 @@ function Dashboard() {
             <Header2 />
             <Sidebar />
             <PageTitle />
-            {(!isLoading && isLoaded) && (
+            {(!isLoading && isLoaded) ? (
             <div className="content-body">
                 <div className="container-fluid">
                     <div className="row">
@@ -278,7 +279,19 @@ function Dashboard() {
                         </div>
                     </div>
                 </div>
-            </div>)}
+            </div>) : <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginTop: 100,
+            }}>
+            <Loader
+                type="Puff"
+                color="#00BFFF"
+                height={100}
+                width={100}
+                timeout={0} //3 secs
+            /></div>}
         </>
     )
 }

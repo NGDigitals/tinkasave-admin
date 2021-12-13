@@ -20,6 +20,7 @@ class Pager extends Component {
 
   //Handle Page Change
   handlePageChange = page => {
+    console.log('Change: ', page);
     this.setState({
       activePage: page
     });
@@ -32,19 +33,19 @@ class Pager extends Component {
 
   //Return pagination UI
   render() {
-    let { activePage, limit, totalRecords } = this.state;
-    console.log('Page: ', activePage)
+    let { limit, totalRecords } = this.state;
+    let { activePage } = this.props;
     return (
       <div className="pagination-wrapper" style={{ marginLeft: "30%" }}>
         <Pagination
-          aria-label="Page navigation example"
+          aria-label=""
           itemClass="page-item"
           linkClass="page-link"
           prevPageText="Prev"
           nextPageText="Next"
           firstPageText="First"
           lastPageText="Last"
-          activePage={activePage}
+          activePage={activePage > 0 ? activePage : 1 }
           itemsCountPerPage={limit}
           totalItemsCount={totalRecords}
           onChange={this.handlePageChange}
@@ -57,7 +58,7 @@ class Pager extends Component {
 Pager.propTypes = {
   totalRecords: PropTypes.any,
   limit: PropTypes.any,
-  activePage: PropTypes.any,
+  activePage: PropTypes.number,
   getAllData: PropTypes.any
 };
 

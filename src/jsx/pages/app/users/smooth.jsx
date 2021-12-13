@@ -2,12 +2,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import NumberFormat from 'react-number-format';
 import { useParams } from "react-router-dom";
+import isEmpty from 'lodash/isEmpty';
+import Loader from "react-loader-spinner";
+import Pager from '../../../element/pager';
 import Header2 from '../../../layout/header2';
 import Sidebar from '../../../layout/sidebar';
 import PageTitle from '../../../element/page-title';
 import config from '../../../helper/config';
 import UserService from '../../../services/UserService';
 
+const LIMIT = 20;
 const SERVICE_NAME = 'smooth';
 
 function Smooth() {
@@ -18,6 +22,8 @@ function Smooth() {
     const [services, setServices] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [totalItems, setTotalItems] = useState(0);
+    const [currentPage, setCurrentPage] = useState(0);
 
     useEffect(() => {
         isRendered.current = true;
@@ -32,11 +38,13 @@ function Smooth() {
             setIsLoading(true);
             const response = await UserService.fetchServices(SERVICE_NAME, id);
             if (isRendered.current) {
-                const { user, content } = response.data.result
+                const { user, content, total } = response.data.result
                 setUser(user)
                 setServices(content);
                 setIsLoading(false);
                 setIsLoaded(true);
+                setCurrentPage(page);
+                setTotalItems(total)
             }
         } catch (error) {
           if (isRendered.current) {
@@ -52,7 +60,7 @@ function Smooth() {
             <Header2 />
             <Sidebar />
             <PageTitle />
-            {(!isLoading && isLoaded) && (
+            {(!isLoading && isLoaded && !isEmpty(services)) ? (
             <div className="content-body">
                 <div className="container-fluid">
                     <div className="row">
@@ -158,7 +166,19 @@ function Smooth() {
                         </div>
                     </div>
                 </div>
-            </div>)}
+            </div>) : <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginTop: 100,
+            }}>
+            <Loader
+                type="Puff"
+                color="#00BFFF"
+                height={100}
+                width={100}
+                timeout={0} //3 secs
+            /></div>}
         </>
     )
 }

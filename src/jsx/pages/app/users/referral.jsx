@@ -3,13 +3,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import NumberFormat from 'react-number-format';
 import { useParams } from "react-router-dom";
 import { Line } from 'rc-progress';
+import Pager from '../../../element/pager';
 import Header2 from '../../../layout/header2';
 import Sidebar from '../../../layout/sidebar';
 import PageTitle from '../../../element/page-title';
 import config from '../../../helper/config';
 import UserService from '../../../services/UserService';
 
-const LIMIT = 25;
+const LIMIT = 20;
 
 function Referral() {
 
@@ -19,7 +20,7 @@ function Referral() {
     const [users, setUsers] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [isLast, setIsLast] = useState(true);
+    const [totalItems, setTotalItems] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
 
     useEffect(() => {
@@ -34,16 +35,17 @@ function Referral() {
         try {
             setIsLoading(true);
             const response = await UserService.fetchReferral(id, page, LIMIT);
+            console.log(response)
             if (isRendered.current) {
                 if(response.data.success){
                     const { user, content,
-                        is_last, current_page } = response.data.result
-                    setIsLast(is_last);
-                    setCurrentPage(current_page + 1);
+                        total } = response.data.result
                     setUser(user)
                     setUsers(content);
                     setIsLoading(false);
                     setIsLoaded(true);
+                    setCurrentPage(page);
+                    setTotalItems(total)
                 }
             }
         } catch (error) {

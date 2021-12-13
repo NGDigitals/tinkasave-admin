@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from 'react';
 import NumberFormat from 'react-number-format';
+import Pager from '../../../element/pager';
+import Loader from "react-loader-spinner";
 import Header2 from '../../../layout/header2';
 import Sidebar from '../../../layout/sidebar';
 import PageTitle from '../../../element/page-title';
@@ -16,7 +18,7 @@ function Airtime() {
     const [transactions, setTransactions] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [isLast, setIsLast] = useState(true);
+    const [totalItems, setTotalItems] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
 
     useEffect(() => {
@@ -33,11 +35,11 @@ function Airtime() {
             const response = await DashboardService.fetchTransactions(SERVICE_NAME, page, LIMIT);
             if (isRendered.current) {
                 const {
-                    content, is_last, current_page,
+                    content, total,
                   } = response.data.result;
-                setIsLast(is_last);
                 setTransactions(page === 0 ? [...content] : [...transactions, ...content]);
-                setCurrentPage(current_page + 1);
+                setCurrentPage(page);
+                setTotalItems(total)
                 setIsLoading(false);
                 setIsLoaded(true);
             }
@@ -55,7 +57,7 @@ function Airtime() {
             <Header2 />
             <Sidebar />
             <PageTitle />
-            {(!isLoading && isLoaded) && (
+            {(!isLoading && isLoaded /*&& !isEmpty(transactions)*/) ? (
             <div className="content-body">
                 <div className="container-fluid">
                     <div className="row">
@@ -117,7 +119,28 @@ function Airtime() {
                         </div>
                     </div>
                 </div>
-            </div>)}
+                <div>
+                    {transactions &&
+                        <Pager
+                            getAllData={fetchData} 
+                            totalRecords={totalItems}
+                            activePage={currentPage}
+                            itemsCountPerPage = {LIMIT} />
+                    }
+                </div>
+            </div>) : <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginTop: 100,
+            }}>
+            <Loader
+                type="Puff"
+                color="#00BFFF"
+                height={100}
+                width={100}
+                timeout={0} //3 secs
+            /></div>}
         </>
     )
 }

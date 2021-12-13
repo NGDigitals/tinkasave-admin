@@ -3,16 +3,18 @@ import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {isEmpty, debounce} from 'lodash';
 import ReactRoundedImage from "react-rounded-image";
+import Loader from "react-loader-spinner";
 import Pager from '../../../element/pager';
 import config from '../../../helper/config';
 import Header2 from '../../../layout/header2';
 import Sidebar from '../../../layout/sidebar';
 import PageTitle from '../../../element/page-title';
 import UserService from '../../../services/UserService';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 // import SettingsNav from '../../element/settings-nav';
 
-const LIMIT = 5;
+const LIMIT = 10;
 
 function Users() {
     const appPath = config.appPath;
@@ -21,8 +23,9 @@ function Users() {
     const [users, setUsers] = useState([]);
     const [keyword, setKeyword] = useState();
     const [isLoaded, setIsLoaded] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [totalItems, setTotalItems] = useState(0);
+    const [currentPage, setCurrentPage] = useState(0);
 
     // useEffect(() => {
     //     isRendered.current = true;
@@ -55,6 +58,7 @@ function Users() {
                     total, content,
                   } = response.data.result;
                 setUsers(content);
+                setCurrentPage(page);
                 setTotalItems(total)
                 setIsLoading(false);
                 setIsLoaded(true);
@@ -77,7 +81,7 @@ function Users() {
             <Header2 search={search} />
             <Sidebar />
             <PageTitle />
-            {(!isLoading && isLoaded) && (
+            {(!isLoading && isLoaded) ? (
             <div className="content-body">
                 <div className="container-fluid">
                     <div className="row">
@@ -106,12 +110,12 @@ function Users() {
                                                                 <h5 className="mt-0 mb-1"><span>{u.phone}, </span><span>{u.email}</span></h5>
                                                                 {/* <p><span>{u.phone}, </span><span>{u.email}</span></p> */}
                                                                 {/* <h6 className="mt-1 mb-1">Last Login: 12th June, 2021 10:03AM</h6> */}
-                                                                <div className="verified mt-1 mb-1">
-                                                                    <span><i className="la la-check"></i><Link to={`${appPath}/users/${u.id}/referral`}>Bonus ({u.bonus}), Total Savings ({u.total_savings})</Link></span>
-                                                                </div>
-                                                                <div className="verified mt-1 mb-1">
+                                                                {/* <div className="verified mt-1 mb-1">
+                                                                    <span><i className="la la-check"></i><Link to={`${appPath}/users/${u.id}/referral`}>Total Savings ({u.total_savings})</Link></span>
+                                                                </div> */}
+                                                                {/* <div className="verified mt-1 mb-1">
                                                                     <span><i className="la la-check"></i><Link to={`${appPath}/users/${u.id}/referral`}>Referrals ({u.count.referral})</Link></span>
-                                                                </div>
+                                                                </div> */}
                                                                 <div className="verified mt-1 mb-1">
                                                                     <span><i className="la la-check"></i><Link to={`${appPath}/users/${u.id}/airtime`}>Airtime/Data Savings ({u.count.airtime})</Link></span>
                                                                 </div>
@@ -159,11 +163,25 @@ function Users() {
                         <Pager
                             getAllData={fetchData} 
                             totalRecords={totalItems}
-                            activePage={0}
+                            activePage={currentPage}
                             itemsCountPerPage = {LIMIT} />
                     }
                 </div>
-            </div>)}
+            </div>) : 
+            <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginTop: 100,
+            }}>
+            <Loader
+                type="Puff"
+                color="#00BFFF"
+                height={100}
+                width={100}
+                timeout={0} //3 secs
+            /></div>
+            }
         </>
     )
 }

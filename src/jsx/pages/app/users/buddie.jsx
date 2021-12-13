@@ -2,13 +2,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import NumberFormat from 'react-number-format';
 import isEmpty from 'lodash/isEmpty';
+import Pager from '../../../element/pager';
 import { useParams } from "react-router-dom";
+import Loader from "react-loader-spinner";
 import Header2 from '../../../layout/header2';
 import Sidebar from '../../../layout/sidebar';
 import PageTitle from '../../../element/page-title';
 import config from '../../../helper/config';
 import UserService from '../../../services/UserService';
 
+const LIMIT = 20;
 const SERVICE_NAME = 'buddie';
 
 function Buddie() {
@@ -18,7 +21,9 @@ function Buddie() {
     const [services, setServices] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    
+    const [totalItems, setTotalItems] = useState(0);
+    const [currentPage, setCurrentPage] = useState(0);
+
     useEffect(() => {
         isRendered.current = true;
         /*if (navigator.onLine) {*/fetchData(0)/*}*/
@@ -37,6 +42,8 @@ function Buddie() {
                 setServices(content);
                 setIsLoading(false);
                 setIsLoaded(true);
+                // setCurrentPage(page);
+                // setTotalItems(total)
             }
         } catch (error) {
           if (isRendered.current) {
@@ -52,7 +59,7 @@ function Buddie() {
             <Header2 />
             <Sidebar />
             <PageTitle />
-            {(!isLoading && isLoaded && !isEmpty(services)) && (
+            {(!isLoading && isLoaded && !isEmpty(services)) ? (
             <div className="content-body">
                 <div className="container-fluid">
                     <div className="row">
@@ -156,7 +163,28 @@ function Buddie() {
                         </div>
                     </div>
                 </div>
-            </div>)}
+                {/* <div>
+                    {services &&
+                        <Pager
+                            getAllData={fetchData} 
+                            totalRecords={totalItems}
+                            activePage={currentPage}
+                            itemsCountPerPage = {LIMIT} />
+                    }
+                </div> */}
+            </div>) : <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginTop: 100,
+            }}>
+            <Loader
+                type="Puff"
+                color="#00BFFF"
+                height={100}
+                width={100}
+                timeout={0} //3 secs
+            /></div>}
         </>
     )
 }
