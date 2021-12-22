@@ -4,7 +4,7 @@ const config = {
   appPath: '/app',
   authPath: '/auth',
   adminUrl: environment.localeCompare('prod') === 0
-    ? 'http://tinka-admin-env.eu-west-2.elasticbeanstalk.com'
+    ? 'http://admin.tinkasave.com'
     : (environment.localeCompare('test') === 0 ? 'http://tinka-admin-env.eu-west-2.elasticbeanstalk.com' : 'http://localhost:5000'),
   // adminUrl: environment.localeCompare('prod') === 0
   //   ? 'https://admin.k8s.tinkasave.com'
