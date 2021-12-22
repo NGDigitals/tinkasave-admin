@@ -28,7 +28,7 @@ function Users() {
 
     useEffect(() => {
         isRendered.current = true;
-        /*if (navigator.onLine) {*/fetchData(0)/*}*/
+        if (navigator.onLine) {fetchData(0)}
         return () => {
             isRendered.current = false;
         };
@@ -44,7 +44,7 @@ function Users() {
                   } = response.data.result;
                 setUsers(page === 0 ? [...content] : [...users, ...content]);
                 setCurrentPage(page);
-                setTotalItems(total)
+                // setTotalItems(total)
                 setIsLoading(false);
                 setIsLoaded(true);
             }

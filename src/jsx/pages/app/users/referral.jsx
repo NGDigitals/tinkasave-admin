@@ -25,7 +25,7 @@ function Referral() {
 
     useEffect(() => {
         isRendered.current = true;
-        /*if (navigator.onLine) {*/fetchData(0)/*}*/
+        if (navigator.onLine) {fetchData(0)}
         return () => {
             isRendered.current = false;
         };

@@ -27,14 +27,6 @@ function Users() {
     const [totalItems, setTotalItems] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
 
-    // useEffect(() => {
-    //     isRendered.current = true;
-    //     /*if (navigator.onLine) {*/fetchData(0)/*}*/
-    //     return () => {
-    //         isRendered.current = false;
-    //     };
-    // }, []);
-
     useEffect(() => {
         isRendered.current = true;
         // if (!isEmpty(keyword)) {fetchData(0)}

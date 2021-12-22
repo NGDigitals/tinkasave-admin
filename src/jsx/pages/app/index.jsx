@@ -11,7 +11,6 @@ import PageTitle from '../../element/page-title';
 import AreaChart from '../../charts/area';
 import DashboardService from '../../services/DashboardService';
 
-
 function Dashboard() {
 
     const appPath = config.appPath;
@@ -26,6 +25,8 @@ function Dashboard() {
     const [totalSavings, setTotalSavings] = useState();
     const [totalWithdrawals, setTotalWithdrawals] = useState();
     const [totalInterests, setTotalInterests] = useState();
+    const [totalRegBonus, setTotalRegBonus] = useState();
+    const [totalRefBonus, setTotalRefBonus] = useState();
     const [percentageSavings, setPercentageSavings] = useState();
     const [percentageInterests, setPercentageInterests] = useState();
     const [percentageWithdrawal, setPercentageWithdrawal] = useState();
@@ -36,7 +37,7 @@ function Dashboard() {
 
     useEffect(() => {
         isRendered.current = true;
-        /*if (navigator.onLine) {*/fetchData()/*}*/
+        if (navigator.onLine) {fetchData()}
         return () => {
             isRendered.current = false;
         };
@@ -47,7 +48,7 @@ function Dashboard() {
             setIsLoading(true);
             const response = await DashboardService.fetchDashboard();
             if (isRendered.current) {
-                const {airtime, atm, buddie, group, smooth, kid, 
+                const {airtime, atm, buddie, group, smooth, kid, total_reg_bonus, total_ref_bonus,
                     total_savings, total_withdrawals, total_interests, 
                     percentage_savings, percentage_withdrawal, percentage_interests,
                     savings_transactions, withdrawals_transactions} = response.data.result;
@@ -57,6 +58,8 @@ function Dashboard() {
                     setGroup(group);
                     setSmooth(smooth);
                     setKid(kid);
+                    setTotalRegBonus(total_reg_bonus);
+                    setTotalRefBonus(total_ref_bonus);
                     setTotalSavings(total_savings);
                     setTotalWithdrawals(total_withdrawals);
                     setTotalInterests(total_interests);
@@ -251,14 +254,14 @@ function Dashboard() {
                                                     </div>
                                                     <div className="col-xl-4 col-sm-6 col-6">
                                                         <div className="chart-stat">
-                                                            <p className="mb-1">Lowest Hold</p>
-                                                            {/* <strong>32 Days</strong> */}
+                                                            <p className="mb-1">Registration Bonus</p>
+                                                            <strong>{totalRegBonus}</strong>
                                                         </div>
                                                     </div>
                                                     <div className="col-xl-4 col-sm-6 col-6">
                                                         <div className="chart-stat">
-                                                            <p className="mb-1">Highest Hold</p>
-                                                            {/* <strong>88 Days</strong> */}
+                                                            <p className="mb-1">Referral Bonus</p>
+                                                            <strong>{totalRefBonus}</strong>
                                                         </div>
                                                     </div>
                                                     <div className="col-xl-4 col-sm-6 col-6">

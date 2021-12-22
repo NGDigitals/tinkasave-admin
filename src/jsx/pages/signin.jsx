@@ -27,15 +27,15 @@ function Signin() {
         if (!isEmpty(errors)) {
           setErrors(errors);
         } else {
-            // if (navigator.onLine) {
+            if (navigator.onLine) {
                 const data = {
                     email,
                     password,
                 };
                 login(data);
-            // } else {
-            //     setError("No internet connection");
-            // }
+            } else {
+                setError("No internet connection");
+            }
         }
     };
 
@@ -112,13 +112,8 @@ function Signin() {
                                             aria-hidden="true"
                                             />}
                                         </Button>
-                                            {/* <Link to={'#'} type="submit" className="btn btn-success btn-block">Sign in</Link> */}
                                         </div>
                                     </form>
-                                    {/* <div className="new-account mt-3">
-                                        <p>Don't have an account? <Link className="text-primary" to={"./signup"}>Sign
-                                            up</Link></p>
-                                    </div> */}
                                 </div>
                             </div>
                         </div>
