@@ -20,7 +20,6 @@ class Pager extends Component {
 
   //Handle Page Change
   handlePageChange = page => {
-    console.log('Change: ', page);
     this.setState({
       activePage: page
     });
@@ -33,8 +32,8 @@ class Pager extends Component {
 
   //Return pagination UI
   render() {
-    let { limit, totalRecords } = this.state;
-    let { activePage } = this.props;
+    // let { totalRecords } = this.state;
+    let { limit, activePage, totalRecords } = this.props;
     return (
       <div className="pagination-wrapper" style={{ marginLeft: "30%" }}>
         <Pagination

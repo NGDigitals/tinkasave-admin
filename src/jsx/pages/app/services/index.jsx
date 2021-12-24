@@ -24,6 +24,7 @@ function Users() {
     const [currentPage, setCurrentPage] = useState(0);
     const [showModal, setShowModal] = useState(false);
     const [modalData, setModalData] = useState({})
+    const [sessionExpired, setSessionExpired] = useState(false);
     // const { targetRef, openModal, closeModal, isOpen, Modal } = useModal()
 
     useEffect(() => {
@@ -51,8 +52,8 @@ function Users() {
         } catch (error) {
           if (isRendered.current) {
             setIsLoading(false);
-            // if (error.response && error.response.status === 401)
-            //   setUnauthorizedAction(true);
+            if (error.response && error.response.status === 401)
+              setSessionExpired(true);
           }
         }
     };
@@ -68,7 +69,7 @@ function Users() {
 
     return (
         <>
-            <Header2 />
+            <Header2 expired={sessionExpired} />
             <Sidebar />
             <PageTitle />
             {(!isLoading && isLoaded && !isEmpty(users)) ? (

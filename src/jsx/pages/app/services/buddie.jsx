@@ -22,6 +22,7 @@ function Buddie() {
     const [keyword, setKeyword] = useState();
     const [totalItems, setTotalItems] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
+    const [sessionExpired, setSessionExpired] = useState(false);
     
     useEffect(() => {
         isRendered.current = true;
@@ -61,8 +62,8 @@ function Buddie() {
         } catch (error) {
           if (isRendered.current) {
             setIsLoading(false);
-            // if (error.response && error.response.status === 401)
-            //   setUnauthorizedAction(true);
+            if (error.response && error.response.status === 401)
+              setSessionExpired(true);
           }
         }
     };
@@ -73,7 +74,7 @@ function Buddie() {
 
     return (
         <>
-            <Header2 search={search} />
+            <Header2 search={search} expired={sessionExpired} />
             <Sidebar />
             <PageTitle />
             {(!isLoading && isLoaded && !isEmpty(transactions)) ? (

@@ -24,7 +24,8 @@ function Smooth() {
     const [isLoading, setIsLoading] = useState(false);
     const [totalItems, setTotalItems] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
-
+    const [sessionExpired, setSessionExpired] = useState(false);
+    
     useEffect(() => {
         isRendered.current = true;
         if (navigator.onLine) {fetchData(0)}
@@ -49,15 +50,15 @@ function Smooth() {
         } catch (error) {
           if (isRendered.current) {
             setIsLoading(false);
-            // if (error.response && error.response.status === 401)
-            //   setUnauthorizedAction(true);
+            if (error.response && error.response.status === 401)
+              setSessionExpired(true);
           }
         }
     };
 
     return (
         <>
-            <Header2 />
+            <Header2 expired={sessionExpired} />
             <Sidebar />
             <PageTitle />
             {(!isLoading && isLoaded && !isEmpty(services)) ? (

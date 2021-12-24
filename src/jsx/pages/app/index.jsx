@@ -34,6 +34,7 @@ function Dashboard() {
     const [withdrawalsTransactions, setWithdrawalsTransactions] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [sessionExpired, setSessionExpired] = useState(false);
 
     useEffect(() => {
         isRendered.current = true;
@@ -74,15 +75,15 @@ function Dashboard() {
         } catch (error) {
           if (isRendered.current) {
             setIsLoading(false);
-            // if (error.response && error.response.status === 401)
-            //   setUnauthorizedAction(true);
+            if (error.response && error.response.status === 401)
+              setSessionExpired(true);
           }
         }
     };
 
     return (
         <>
-            <Header2 />
+            <Header2 expired={sessionExpired} />
             <Sidebar />
             <PageTitle />
             {(!isLoading && isLoaded) ? (

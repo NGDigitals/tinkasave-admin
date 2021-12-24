@@ -12,8 +12,6 @@ import PageTitle from '../../../element/page-title';
 import UserService from '../../../services/UserService';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
-// import SettingsNav from '../../element/settings-nav';
-
 const LIMIT = 10;
 
 function Users() {
@@ -26,6 +24,7 @@ function Users() {
     const [isLoading, setIsLoading] = useState(true);
     const [totalItems, setTotalItems] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
+    const [sessionExpired, setSessionExpired] = useState(false);
 
     useEffect(() => {
         isRendered.current = true;
@@ -58,8 +57,8 @@ function Users() {
         } catch (error) {
           if (isRendered.current) {
             setIsLoading(false);
-            // if (error.response && error.response.status === 401)
-            //   setUnauthorizedAction(true);
+            if (error.response && error.response.status === 401)
+              setSessionExpired(true);
           }
         }
     };
@@ -70,20 +69,17 @@ function Users() {
 
     return (
         <>
-            <Header2 search={search} />
+            <Header2 search={search} expired={sessionExpired} />
             <Sidebar />
             <PageTitle />
             {(!isLoading && isLoaded) ? (
             <div className="content-body">
                 <div className="container-fluid">
                     <div className="row">
-                        {/* <div className="col-xl-3 col-md-4">
-                            <SettingsNav />
-                        </div> */}
                         <div className="col-xl-9 col-md-8">
                             <div className="card">
                                 <div className="card-header">
-                                    <h4 className="card-title">Active Users</h4>
+                                    <h4 className="card-title">Active Users ({`${totalItems}`})</h4>
                                 </div>
                                 <div className="card-body">
                                     <div className="form">

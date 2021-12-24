@@ -1,15 +1,19 @@
-import React, { } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { isEmpty } from 'lodash';
 import { DropdownButton, } from 'react-bootstrap'
 import { setCurrentUser, getCurrentUser } from '../helper/utils';
 
-function Header2({ search }) {
+function Header2({ search, expired }) {
     const currentUser = getCurrentUser();
     const logout = () => {
         setCurrentUser();
         window.location.reload();
     }
+
+    useEffect(() => {
+        if (expired) {logout()}
+    }, [expired]);
 
     return (
         <>
