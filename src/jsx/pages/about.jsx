@@ -23,7 +23,7 @@ function About() {
                         </div>
                         <div className="col-lg-6">
                             <div className="service-content m-t-50">
-                                <h3>In Brief</h3>
+                                <h3>In Brief </h3>
                                 <p>Founded in January of 2020, Tradix is a digital currency wallet and platform where
                                     merchants
                                     and consumers can transact with new digital currencies like bitcoin, ethereum, and

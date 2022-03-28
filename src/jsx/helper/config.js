@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-const environment = 'prod';
+const environment = 'dev';
 const config = {
   appPath: '/app',
   authPath: '/auth',
